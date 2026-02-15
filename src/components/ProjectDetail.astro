@@ -1,55 +1,80 @@
 ---
 export interface Props {
-  frontmatter: any;
-  Content?: any;
+  frontmatter: {
+    title: string;
+    description?: string;
+    repo?: string;
+    tech?: string[];
+    date?: string;
+    [key: string]: any;
+  };
 }
-const { frontmatter, Content } = Astro.props as Props;
+
+const { frontmatter } = Astro.props;
 ---
 
-<section class="py-20 px-4">
-  <div class="max-w-6xl mx-auto relative">
-    <a href="/portfolio" class="absolute right-4 top-4 w-10 h-10 rounded-full border border-emerald-600 flex items-center justify-center text-emerald-200 hover:bg-emerald-700/30 transition" aria-label="Back to portfolio">✕</a>
+<section class="py-20 px-4 min-h-screen">
+  <div class="max-w-6xl mx-auto">
+    
+    <div class="mb-8">
+      <a href="/portfolio" class="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors">
+        <span>&larr; Back to Portfolio</span>
+      </a>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-      <aside>
-        <div class="mb-4 p-6">
-          <h1 class="text-4xl md:text-5xl font-bold mb-2 text-emerald-400">{frontmatter.title}</h1>
-          {frontmatter.description ? <p class="text-gray-300 max-w-2xl">{frontmatter.description}</p> : null}
-        </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      
+      <aside class="lg:col-span-1">
+        <div class="lg:sticky lg:top-24 bg-gray-900/40 border border-gray-700/50 rounded-xl p-6 backdrop-blur-sm">
+          
+          <h1 class="text-3xl font-bold text-emerald-400 mb-4 leading-tight">
+            {frontmatter.title}
+          </h1>
+          
+          {frontmatter.description && (
+            <p class="text-gray-300 mb-6 text-sm leading-relaxed">
+              {frontmatter.description}
+            </p>
+          )}
 
-        <div class="card-open mt-0">
-          <h3 class="text-2xl font-bold text-emerald-400 mb-4">Project Details</h3>
-          <div class="space-y-4">
-            {frontmatter.tech ? (
+          <div class="space-y-6">
+            {frontmatter.tech && (
               <div>
-                <p class="text-emerald-300 font-semibold mb-2">Technologies</p>
+                <h3 class="text-emerald-500 text-xs font-bold uppercase tracking-wider mb-3">Technologies</h3>
                 <div class="flex flex-wrap gap-2">
                   {frontmatter.tech.map((t) => (
-                    <span class="px-3 py-1 bg-emerald-900/40 border border-emerald-500/20 rounded-full text-sm text-emerald-200">{t}</span>
+                    <span class="px-2 py-1 bg-emerald-900/30 border border-emerald-500/20 rounded text-xs text-emerald-200">
+                      {t}
+                    </span>
                   ))}
                 </div>
               </div>
-            ) : null}
+            )}
 
-            {frontmatter.repo ? (
+            {frontmatter.repo && (
               <div>
-                <p class="text-emerald-300 font-semibold mb-2">Repository</p>
-                <a class="inline-block text-emerald-400 hover:text-emerald-300 break-all" href={frontmatter.repo} target="_blank" rel="noopener noreferrer">{frontmatter.repo}</a>
+                 <h3 class="text-emerald-500 text-xs font-bold uppercase tracking-wider mb-3">Links</h3>
+                <a 
+                  href={frontmatter.repo} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-2 text-white hover:text-emerald-400 transition-colors text-sm break-all"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  View Repository
+                </a>
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </aside>
 
-      <div class="md:mt-36">
-        <div class="card-open prose prose-invert max-w-none text-lg leading-relaxed pt-0">
-          <div>{Content ? <Content /> : <slot />}</div>
-        </div>
-      </div>
+      <main class="lg:col-span-2">
+        <article class="prose prose-invert prose-emerald max-w-none prose-headings:text-emerald-50 prose-a:text-emerald-400">
+            <slot />
+        </article>
+      </main>
+
     </div>
   </div>
 </section>
-
-<style>
-  :global(.prose) { color: #e5e7eb; }
-</style>

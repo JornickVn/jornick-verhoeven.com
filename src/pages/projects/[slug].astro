@@ -3,31 +3,31 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
 
-// Use absolute /src path so Astro can resolve files consistently at build-time
+// 1. Generate paths and pass the ENTIRE project data as a prop
 export async function getStaticPaths() {
-  const modules = import.meta.glob('/src/content/projects/*.md', { eager: true });
-  const entries = Object.values(modules);
-  const paths = entries
-    .map((m) => m.frontmatter && m.frontmatter.slug)
-    .filter(Boolean)
-    .map((slug) => ({ params: { slug } }));
-  return paths;
+  // Astro.glob is easier than import.meta.glob for this
+  const projects = await Astro.glob('../../content/projects/*.md');
+
+  return projects.map((project) => ({
+    params: { 
+      // Ensure your MD files have a 'slug' in the frontmatter!
+      slug: project.frontmatter.slug 
+    }, 
+    props: { 
+      project 
+    },
+  }));
 }
 
-const modules = import.meta.glob('/src/content/projects/*.md', { eager: true });
-const entries = Object.values(modules);
-const slug = Astro.params.slug;
-const match = entries.find((m) => (m.frontmatter && m.frontmatter.slug === slug));
-
-if (!match) {
-  throw new Error(`Project not found: ${slug}`);
-}
-
-const frontmatter = match.frontmatter || {};
-const Content = match.default;
+// 2. Accept the prop (No need to search files again!)
+const { project } = Astro.props;
+const frontmatter = project.frontmatter;
+const Content = project.Content;
 ---
 
 <Layout>
   <Navbar />
-  <ProjectDetail frontmatter={frontmatter} Content={Content} />
+  <ProjectDetail frontmatter={frontmatter}>
+    <Content />
+  </ProjectDetail>
 </Layout>

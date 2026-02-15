@@ -1,39 +1,89 @@
 ---
+const languages = [
+  "Java",
+  "C#",
+  "TypeScript",
+  "JavaScript",
+  "Python",
+  "HTML/CSS"
+];
+
+const frameworks = [
+  ".NET",
+  "Spring Boot",
+  "Next.js",
+  "React",
+  "Astro",
+  "Tailwind CSS"
+];
+const tools = [
+  "Git",
+  "SQL", 
+  "Docker",
+  "PostgreSQL" 
+];
 ---
 
 <section class="py-20 px-4">
   <div class="max-w-4xl mx-auto">
+    
     <div class="mb-8">
       <h2 class="text-4xl md:text-5xl font-bold mb-4 text-emerald-400">About Me</h2>
-      <div class="accent-line w-16 h-1 mb-6"></div>
+      <div class="accent-line w-16 h-1 mb-6 bg-emerald-500"></div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
       <div>
         <h3 class="text-2xl font-bold text-emerald-400 mb-4">Who I Am</h3>
-        <p class="text-gray-300 leading-relaxed mb-4">I'm Jornick Verhoeven, a full-stack developer passionate about building robust and scalable applications. With expertise in modern web technologies and a strong foundation in computer science, I transform ideas into functional digital solutions.</p>
-        <p class="text-gray-300 leading-relaxed">I thrive in collaborative environments and enjoy tackling complex problems with clean, efficient code. From front-end interfaces to backend systems, I aim to deliver high-quality results.</p>
+        <p class="text-gray-300 leading-relaxed mb-4">
+          I'm Jornick Verhoeven, a software developer starting my career with a strong focus on the .NET and Java ecosystems.
+        </p>
+        <p class="text-gray-300 leading-relaxed mb-4">
+          With a Bachelor's in Computer Science, I specialize in building reliable backend systems, though I enjoy working across the full stack. I am eager to apply my academic knowledge to professional environments and continue learning every day.
+        </p>
+        <p class="text-gray-300 leading-relaxed">
+          In my free time, I like to experiment with new technologies and I am also a passionate skateboarder.
+        </p>
       </div>
 
       <div>
         <h3 class="text-2xl font-bold text-emerald-400 mb-4">My Skills</h3>
-        <div class="space-y-3">
+        <div class="space-y-4">
+          
           <div>
             <p class="text-emerald-300 font-semibold mb-2">Languages</p>
             <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-emerald-900/40 border border-emerald-500/30 rounded-full text-sm text-emerald-200">JavaScript</span>
-              <span class="px-3 py-1 bg-emerald-900/40 border border-emerald-500/30 rounded-full text-sm text-emerald-200">Python</span>
-              <span class="px-3 py-1 bg-emerald-900/40 border border-emerald-500/30 rounded-full text-sm text-emerald-200">HTML/CSS</span>
+              {languages.map((skill) => (
+                <span class="px-3 py-1 bg-emerald-900/40 border border-emerald-500/30 rounded-full text-sm text-emerald-200">
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
 
           <div>
-            <p class="text-emerald-300 font-semibold mb-2">Frameworks & Tools</p>
+            <p class="text-emerald-300 font-semibold mb-2">Frameworks</p>
             <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-emerald-900/40 border border-emerald-500/30 rounded-full text-sm text-emerald-200">Astro</span>
-              <span class="px-3 py-1 bg-emerald-900/40 border border-emerald-500/30 rounded-full text-sm text-emerald-200">Tailwind CSS</span>
+              {frameworks.map((skill) => (
+                <span class="px-3 py-1 bg-emerald-900/40 border border-emerald-500/30 rounded-full text-sm text-emerald-200">
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
+
+          <div>
+            <p class="text-emerald-300 font-semibold mb-2">Tools & Databases</p>
+            <div class="flex flex-wrap gap-2">
+              {tools.map((skill) => (
+                <span class="px-3 py-1 bg-emerald-900/40 border border-emerald-500/30 rounded-full text-sm text-emerald-200">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -42,8 +92,12 @@
       <h3 class="text-2xl font-bold text-emerald-400 mb-4">Let's Connect</h3>
       <p class="text-gray-300 mb-6">I'm always open to new opportunities and collaborations. Reach out via GitHub or LinkedIn.</p>
       <div class="flex gap-4">
-        <a href="https://github.com/JornickVn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors">GitHub</a>
-        <a href="https://linkedin.com/in/jornick-verhoeven" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors">LinkedIn</a>
+        <a href="https://github.com/JornickVn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors font-medium">
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/jornick-verhoeven" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors font-medium">
+          LinkedIn
+        </a>
       </div>
     </div>
   </div>
