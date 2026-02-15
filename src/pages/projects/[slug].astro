@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+
+// Use absolute /src path so Astro can resolve files consistently at build-time
+export async function getStaticPaths() {
+  const modules = import.meta.glob('/src/content/projects/*.md', { eager: true });
+  const entries = Object.values(modules);
+  const paths = entries
+    .map((m) => m.frontmatter && m.frontmatter.slug)
+    .filter(Boolean)
+    .map((slug) => ({ params: { slug } }));
+  return paths;
+}
+
+const modules = import.meta.glob('/src/content/projects/*.md', { eager: true });
+const entries = Object.values(modules);
+const slug = Astro.params.slug;
+const match = entries.find((m) => (m.frontmatter && m.frontmatter.slug === slug));
+
+if (!match) {
+  throw new Error(`Project not found: ${slug}`);
+}
+
+const frontmatter = match.frontmatter || {};
+const Content = match.default;
+---
+
+<Layout>
+  <Navbar />
+  <ProjectDetail frontmatter={frontmatter} Content={Content} />
+</Layout>

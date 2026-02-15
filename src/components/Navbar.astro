@@ -1,0 +1,26 @@
+---
+export interface Props {
+    logo?: string;
+}
+export let logo: string | undefined = undefined;
+---
+<header class="sticky top-0 z-40 bg-gradient-to-r from-slate-900/95 to-emerald-950/95 backdrop-blur-md border-b border-emerald-500/20">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3">
+            {logo ? (
+                <img src={logo} alt="Site logo" class="h-10 w-auto rounded-full" />
+            ) : (
+                <img src="/src/assets/Logo.jpg" alt="Site logo" class="h-10 w-auto rounded-full" />
+            )}
+            <span class="hidden sm:inline text-lg font-semibold text-emerald-400">Jornick</span>
+        </a>
+
+        <nav aria-label="Primary navigation">
+            <ul class="flex items-center gap-8 text-sm font-medium">
+                <li><a href="/" class="hover:text-emerald-400 transition-colors duration-200">Home</a></li>
+                <li><a href="/portfolio" class="hover:text-emerald-400 transition-colors duration-200">Portfolio</a></li>
+                <li><a href="/about" class="hover:text-emerald-400 transition-colors duration-200">About</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>

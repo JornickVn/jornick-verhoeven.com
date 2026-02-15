@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Basic defaults you can extend */
+:root {
+  --site-max-width: 1200px;
+  --color-primary: #22c55e;
+  --color-primary-dark: #15803d;
+  --color-bg-base: #0f1419;
+  --color-bg-surface: #1a1f2e;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Ensure the gradient covers the root element to avoid white showing when scrolling */
+html {
+  @apply bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950;
+  background-attachment: fixed;
+}
+
+/* Prevent pull/overscroll behavior showing background on some devices */
+html, body {
+  overscroll-behavior-y: none;
+}
+
+/* Body class to disable scrolling on pages that need it (home hero) */
+body.no-scroll {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  @apply bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950 text-white;
+}
+
+/* Emerald green accent styles */
+@layer components {
+  .btn-primary {
+    @apply bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-primary-outline {
+    @apply border-2 border-emerald-500 text-emerald-400 hover:bg-emerald-500/10 font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .card {
+    @apply bg-slate-800/50 backdrop-blur-sm border border-emerald-500/20 rounded-lg p-6 hover:border-emerald-400/50 transition-colors duration-200;
+  }
+
+  /* Open-flow variant used for project detail pages: no border or heavy background */
+  .card-open {
+    @apply bg-transparent border-0 rounded-none p-6; 
+  }
+  
+  .text-accent {
+    @apply text-emerald-400;
+  }
+  
+  .accent-line {
+    @apply h-1 bg-gradient-to-r from-emerald-500 to-emerald-400;
+  }
+}
