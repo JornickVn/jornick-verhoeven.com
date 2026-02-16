@@ -2,9 +2,20 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import type { MarkdownInstance } from 'astro';
+
+interface ProjectFrontmatter {
+  title: string;
+  slug: string;
+  description?: string;
+  repo?: string;
+  tech?: string[];
+  date?: string;
+  image?: string;
+}
 
 export async function getStaticPaths() {
-  const projects = await Astro.glob('../../content/projects/*.md');
+  const projects: MarkdownInstance<ProjectFrontmatter>[] = await Astro.glob('../../content/projects/*.md');
 
   return projects.map((project) => ({
     params: { 
@@ -15,7 +26,10 @@ export async function getStaticPaths() {
     },
   }));
 }
-// ---------------------------------------------------------
+
+interface Props {
+  project: MarkdownInstance<ProjectFrontmatter>;
+}
 
 const { project } = Astro.props;
 const frontmatter = project.frontmatter;

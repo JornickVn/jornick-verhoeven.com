@@ -3,7 +3,7 @@ title: "Portfolio Website"
 description: "A high-performance portfolio built with Astro and Tailwind CSS."
 repo: "https://github.com/JornickVn/Jornick-verhoeven.com"
 tech: ["Astro", "Tailwind CSS"]
-date: 2025-03-17
+date: 2026-02-16
 slug: portfolio-website
 image: "/portfolio.png" 
 ---
