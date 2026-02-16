@@ -5,7 +5,7 @@ repo: "https://github.com/JornickVn/Jornick-verhoeven.com"
 tech: ["Astro", "Tailwind CSS"]
 date: 2025-03-17
 slug: portfolio-website
-image: "/src/assets/portfolio.png" 
+image: "/portfolio.png" 
 ---
 **The Inspiration**
 
