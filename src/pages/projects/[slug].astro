@@ -3,14 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
 
-// 1. Generate paths and pass the ENTIRE project data as a prop
 export async function getStaticPaths() {
-  // Astro.glob is easier than import.meta.glob for this
   const projects = await Astro.glob('../../content/projects/*.md');
 
   return projects.map((project) => ({
     params: { 
-      // Ensure your MD files have a 'slug' in the frontmatter!
       slug: project.frontmatter.slug 
     }, 
     props: { 
@@ -18,15 +15,16 @@ export async function getStaticPaths() {
     },
   }));
 }
+// ---------------------------------------------------------
 
-// 2. Accept the prop (No need to search files again!)
 const { project } = Astro.props;
 const frontmatter = project.frontmatter;
 const Content = project.Content;
 ---
 
-<Layout>
+<Layout title={frontmatter.title}>
   <Navbar />
+  
   <ProjectDetail frontmatter={frontmatter}>
     <Content />
   </ProjectDetail>

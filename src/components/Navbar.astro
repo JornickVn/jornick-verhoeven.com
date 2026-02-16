@@ -1,18 +1,28 @@
 ---
-export interface Props {
-    logo?: string;
-}
-export let logo: string | undefined = undefined;
+import defaultLogo from '../assets/me.png';
+
+    
+const { logo } = Astro.props;
 ---
 <header class="sticky top-0 z-40 bg-gradient-to-r from-slate-900/95 to-emerald-950/95 backdrop-blur-md border-b border-emerald-500/20">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <a href="/" class="flex items-center gap-3">
             {logo ? (
-                <img src={logo} alt="Site logo" class="h-10 w-auto rounded-full" />
+                <img 
+                    src={logo} 
+                    alt="Site logo" 
+                    class="h-14 w-14 rounded-full object-cover shadow-lg" 
+                />
             ) : (
-                <img src="/src/assets/Logo.jpg" alt="Site logo" class="h-10 w-auto rounded-full" />
+                <div class="h-14 w-14 rounded-full overflow-hidden shadow-lg border border-emerald-500/20">
+                    <img 
+                        src={defaultLogo.src} 
+                        alt="Jornick" 
+                        class="h-full w-full object-cover object-[75%_35%] scale-125" 
+                    />
+                </div>
             )}
-            <span class="hidden sm:inline text-lg font-semibold text-emerald-400">Jornick</span>
+            <span class="hidden sm:inline text-xl font-semibold text-emerald-400 tracking-wide">Jornick Verhoeven</span>
         </a>
 
         <nav aria-label="Primary navigation">
